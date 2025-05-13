@@ -117,7 +117,6 @@ public class Main {
                 .forEach(System.out::println);
     }
 
-    // Métodos auxiliares para entrada de dados
     private static String lerString(String mensagem) {
         System.out.print(mensagem);
         return scanner.nextLine();

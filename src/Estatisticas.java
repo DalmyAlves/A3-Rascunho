@@ -14,7 +14,7 @@ public class Estatisticas {
         this.vitorias = vitorias;
         this.derrotas = derrotas;
         this.pontos = calcularPontuacao();
-        this.ranking = ranking;
+
     }
 
     private int calcularPontuacao() {
