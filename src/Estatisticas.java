@@ -7,7 +7,7 @@ public class Estatisticas {
     private int derrotas;
     private int ranking;
 
-    public Estatisticas(String nomeJogadorOuEquipe, String torneioId, int partidasJogadas, int vitorias, int derrotas, int abates, int mortes) {
+    public Estatisticas(String nomeJogadorOuEquipe, String torneioId, int partidasJogadas, int vitorias, int derrotas) {
         this.nomeJogadorOuEquipe = nomeJogadorOuEquipe;
         this.torneioId = torneioId;
         this.partidasJogadas = partidasJogadas;

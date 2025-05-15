@@ -10,10 +10,6 @@ public class ControladorEstatisticas {
         this.estatisticasList = new ArrayList<>();
     }
 
-    public void adicionarEstatisticas(Estatisticas estatisticas) {
-        estatisticasList.add(estatisticas);
-    }
-
     public void atualizarRanking() {
         Collections.sort(estatisticasList, Comparator.comparingInt(Estatisticas::getPontos).reversed());
 
@@ -54,7 +50,7 @@ public class ControladorEstatisticas {
         }
 
         Estatisticas novaEstatistica = new Estatisticas(
-                nomeJogadorOuEquipe, torneioId, 0, 0, 0, 0, 0);
+                nomeJogadorOuEquipe, torneioId, 0, 0, 0);
         estatisticasList.add(novaEstatistica);
         return novaEstatistica;
     }
