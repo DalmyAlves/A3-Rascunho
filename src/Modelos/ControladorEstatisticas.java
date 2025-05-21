@@ -1,13 +1,11 @@
 package Modelos;
 
-import Repositorios.InterfaceControladorEstatisticas;
-
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
-public class ControladorEstatisticas implements InterfaceControladorEstatisticas {
+public class ControladorEstatisticas {
     private List<Estatisticas> estatisticasList;
 
     public ControladorEstatisticas() {

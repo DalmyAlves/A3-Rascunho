@@ -1,8 +1,6 @@
 package Modelos;
 
-import Repositorios.InterfaceEstatisticas;
-
-public class Estatisticas implements InterfaceEstatisticas {
+public class Estatisticas {
     private String nomeJogadorOuEquipe;
     private String torneioId;
     private int pontos;

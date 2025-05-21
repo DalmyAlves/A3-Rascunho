@@ -1,11 +1,13 @@
 package Repositorios.Listas;
 
 import Modelos.Estatisticas;
+import Repositorios.InterfaceRepoListasEstatiscas;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-public class RepoListaEstatisticas {
+public class RepoListaEstatisticas implements InterfaceRepoListasEstatiscas {
     private List<Estatisticas> estatisticas = new ArrayList<>();
 
     public void adicionar(Estatisticas estatistica) {
