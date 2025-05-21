@@ -3,12 +3,17 @@ package Modelos;
 import java.util.List;
 import java.util.Scanner;
 
+/**
+ * Classe principal (main) do sistema de estatísticas esportivas.
+ * Responsável por interagir com o usuário, mostrar menus e executar as operações.
+ */
 public class Main {
     private static ControladorEstatisticas controlador = new ControladorEstatisticas ();
     private static Scanner scanner = new Scanner(System.in);
 
     public static void main(String[] args) {
         int opcao;
+        // Loop principal do menu
         do {
             exibirMenuPrincipal();
             opcao = lerInteiro("Digite sua opção: ");
@@ -35,6 +40,9 @@ public class Main {
         } while (opcao != 5);
     }
 
+    /**
+     * Exibe o menu principal com as opções para o usuário.
+     */
     private static void exibirMenuPrincipal() {
         System.out.println("\n=== SISTEMA DE ESTATÍSTICAS ESPORTIVAS ===");
         System.out.println("1. Registrar partida");
@@ -44,6 +52,9 @@ public class Main {
         System.out.println("5. Sair");
     }
 
+    /**
+     * Realiza o registro de uma partida (vitória ou derrota).
+     */
     private static void registrarPartida() {
         System.out.println("\n=== REGISTRAR PARTIDA ===");
         String torneio = lerString("Nome do torneio: ");
@@ -61,6 +72,9 @@ public class Main {
         }
     }
 
+    /**
+     * Exibe os rankings gerais ou por torneio.
+     */
     private static void exibirRankings() {
         System.out.println("\n=== EXIBIR RANKINGS ===");
         System.out.println("1. Ranking geral");
@@ -87,6 +101,9 @@ public class Main {
         }
     }
 
+    /**
+     * Permite consultar as estatísticas de um jogador/equipe em um torneio.
+     */
     private static void consultarEstatisticas() {
         System.out.println("\n=== CONSULTAR ESTATÍSTICAS ===");
         String torneio = lerString("Nome do torneio: ");
@@ -111,6 +128,9 @@ public class Main {
         }
     }
 
+    /**
+     * Lista todos os torneios registrados no sistema.
+     */
     private static void listarTorneios() {
         System.out.println("\n=== TORNEIOS REGISTRADOS ===");
         controlador.getEstatisticasList().stream()
@@ -119,11 +139,17 @@ public class Main {
                 .forEach(System.out::println);
     }
 
+    /**
+     * Lê uma String do usuário.
+     */
     private static String lerString(String mensagem) {
         System.out.print(mensagem);
         return scanner.nextLine();
     }
 
+    /**
+     * Lê um número inteiro do usuário, tratando erro caso digite algo inválido.
+     */
     private static int lerInteiro(String mensagem) {
         while (true) {
             try {

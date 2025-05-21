@@ -1,5 +1,9 @@
 package Modelos;
 
+/**
+ * Classe que representa as estatísticas de um jogador ou equipe em um torneio.
+ * Armazena dados como vitórias, derrotas, pontos e ranking.
+ */
 public class Estatisticas {
     private String nomeJogadorOuEquipe;
     private String nomeTorneio;
@@ -9,6 +13,9 @@ public class Estatisticas {
     private int derrotas;
     private int ranking;
 
+    /**
+     * Construtor da classe. Inicializa os dados da estatística.
+     */
     public Estatisticas(String nomeJogadorOuEquipe, String nomeTorneio, int partidasJogadas, int vitorias, int derrotas) {
         this.nomeJogadorOuEquipe = nomeJogadorOuEquipe;
         this.nomeTorneio = nomeTorneio;
@@ -18,6 +25,10 @@ public class Estatisticas {
         this.pontos = calcularPontuacao();
     }
 
+    /**
+     * Calcula a pontuação com base nas vitórias e derrotas.
+     * Exemplo: vitória vale 15 pts, derrota vale 3 pts.
+     */
     private int calcularPontuacao() {
         return (vitorias * 15) + (derrotas * 3);
     }
@@ -46,18 +57,27 @@ public class Estatisticas {
         return derrotas;
     }
 
+    /**
+     * Adiciona uma vitória e atualiza os pontos e partidas jogadas.
+     */
     public void adicionarVitoria() {
         this.vitorias++;
         this.partidasJogadas++;
         this.pontos = calcularPontuacao();
     }
 
+    /**
+     * Adiciona uma derrota e atualiza os pontos e partidas jogadas.
+     */
     public void adicionarDerrota() {
         this.derrotas++;
         this.partidasJogadas++;
         this.pontos = calcularPontuacao();
     }
 
+    /**
+     * Calcula a porcentagem de vitórias em relação ao total de partidas jogadas.
+     */
     public double calcularTaxaVitoria() {
         return partidasJogadas == 0 ? 0 : (double) vitorias / partidasJogadas * 100;
     }
@@ -68,10 +88,16 @@ public class Estatisticas {
                 nomeJogadorOuEquipe, nomeTorneio, pontos, vitorias, derrotas);
     }
 
+    /**
+     * Define o ranking do jogador/equipe.
+     */
     public void setRanking ( int ranking ) {
         this.ranking = ranking;
     }
 
+    /**
+     * Retorna o ranking do jogador/equipe.
+     */
     public int getRanking () {
         return ranking;
     }
