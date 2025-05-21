@@ -2,21 +2,20 @@ package Modelos;
 
 public class Estatisticas {
     private String nomeJogadorOuEquipe;
-    private String torneioId;
+    private String nomeTorneio;
     private int pontos;
     private int partidasJogadas;
     private int vitorias;
     private int derrotas;
     private int ranking;
 
-    public Estatisticas(String nomeJogadorOuEquipe, String torneioId, int partidasJogadas, int vitorias, int derrotas) {
+    public Estatisticas(String nomeJogadorOuEquipe, String nomeTorneio, int partidasJogadas, int vitorias, int derrotas) {
         this.nomeJogadorOuEquipe = nomeJogadorOuEquipe;
-        this.torneioId = torneioId;
+        this.nomeTorneio = nomeTorneio;
         this.partidasJogadas = partidasJogadas;
         this.vitorias = vitorias;
         this.derrotas = derrotas;
         this.pontos = calcularPontuacao();
-
     }
 
     private int calcularPontuacao() {
@@ -27,8 +26,8 @@ public class Estatisticas {
         return nomeJogadorOuEquipe;
     }
 
-    public String getTorneioId() {
-        return torneioId;
+    public String getNomeTorneio() {
+        return nomeTorneio;
     }
 
     public int getPontos() {
@@ -66,7 +65,7 @@ public class Estatisticas {
     @Override
     public String toString() {
         return String.format("%s - Torneio %s: %d pts (%dV/%dD)",
-                nomeJogadorOuEquipe, torneioId, pontos, vitorias, derrotas);
+                nomeJogadorOuEquipe, nomeTorneio, pontos, vitorias, derrotas);
     }
 
     public void setRanking ( int ranking ) {

@@ -21,7 +21,7 @@ public class RepoListaEstatisticas implements InterfaceRepoListasEstatiscas {
     public Optional<Estatisticas> buscarPorNomeETorneio(String nome, String torneioId) {
         return estatisticas.stream()
                 .filter(e -> e.getNomeJogadorOuEquipe().equals(nome)
-                        && e.getTorneioId().equals(torneioId))
+                        && e.getNomeTorneio().equals(torneioId))
                 .findFirst();
     }
 
@@ -30,7 +30,7 @@ public class RepoListaEstatisticas implements InterfaceRepoListasEstatiscas {
         for (int i = 0; i < estatisticas.size(); i++) {
             Estatisticas e = estatisticas.get(i);
             if (e.getNomeJogadorOuEquipe().equals(estatisticaAtualizada.getNomeJogadorOuEquipe())
-                    && e.getTorneioId().equals(estatisticaAtualizada.getTorneioId())) {
+                    && e.getNomeTorneio().equals(estatisticaAtualizada.getNomeTorneio())) {
                 estatisticas.set(i, estatisticaAtualizada);
                 atualizar = true;
             }
@@ -40,6 +40,6 @@ public class RepoListaEstatisticas implements InterfaceRepoListasEstatiscas {
 
     public boolean removerEstatisticas (String nome, String torneioId) {
         return estatisticas.removeIf(e -> e.getNomeJogadorOuEquipe().equals(nome)
-                && e.getTorneioId().equals(torneioId));
+                && e.getNomeTorneio().equals(torneioId));
     }
 }

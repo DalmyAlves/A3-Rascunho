@@ -23,7 +23,7 @@ public class ControladorEstatisticas {
     public List<Estatisticas> filtrarPorTorneio(String torneioId) {
         List<Estatisticas> resultado = new ArrayList<>();
         for (Estatisticas estatistica : estatisticasList) {
-            if (estatistica.getTorneioId().equals(torneioId)) {
+            if (estatistica.getNomeTorneio().equals(torneioId)) {
                 resultado.add(estatistica);
             }
         }
@@ -46,7 +46,7 @@ public class ControladorEstatisticas {
     private Estatisticas buscarOuCriarEstatistica(String nomeJogadorOuEquipe, String torneioId) {
         for (Estatisticas estatistica : estatisticasList) {
             if (estatistica.getNomeJogadorOuEquipe().equals(nomeJogadorOuEquipe) &&
-                    estatistica.getTorneioId().equals(torneioId)) {
+                    estatistica.getNomeTorneio().equals(torneioId)) {
                 return estatistica;
             }
         }
