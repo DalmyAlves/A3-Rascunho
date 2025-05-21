@@ -111,7 +111,7 @@ public class Main {
 
         Estatisticas stats = controlador.getEstatisticasList().stream()
                 .filter(e -> e.getNomeJogadorOuEquipe().equalsIgnoreCase(participante) &&
-                        e.getNomeTorneio().equalsIgnoreCase(torneio))
+                        e.getTorneioId().equalsIgnoreCase(torneio))
                 .findFirst()
                 .orElse(null);
 
@@ -119,7 +119,7 @@ public class Main {
             System.out.println("Nenhuma estatística encontrada para este participante no torneio especificado.");
         } else {
             System.out.println("\n=== ESTATÍSTICAS DE " + participante.toUpperCase() + " ===");
-            System.out.println("Torneio: " + stats.getNomeTorneio());
+            System.out.println("Torneio: " + stats.getTorneioId());
             System.out.println("Pontos: " + stats.getPontos() + " (15pts por vitória, 3pts por derrota)");
             System.out.println("Partidas jogadas: " + stats.getPartidasJogadas());
             System.out.println("Vitórias: " + stats.getVitorias());
@@ -134,7 +134,7 @@ public class Main {
     private static void listarTorneios() {
         System.out.println("\n=== TORNEIOS REGISTRADOS ===");
         controlador.getEstatisticasList().stream()
-                .map( Estatisticas::getNomeTorneio)
+                .map( Estatisticas::getTorneioId)
                 .distinct()
                 .forEach(System.out::println);
     }
