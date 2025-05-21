@@ -35,13 +35,13 @@ public class ControladorEstatisticas {
 
     /**
      * Filtra as estatísticas apenas para um determinado torneio.
-     * @param torneioId Nome ou ID do torneio
+     * @param nomeTorneio Nome ou ID do torneio
      * @return Lista de estatísticas referentes ao torneio informado
      */
-    public List<Estatisticas> filtrarPorTorneio(String torneioId) {
+    public List<Estatisticas> filtrarPorTorneio(String nomeTorneio) {
         List<Estatisticas> resultado = new ArrayList<>();
         for (Estatisticas estatistica : estatisticasList) {
-            if (estatistica.getTorneioId().equals(torneioId)) {
+            if (estatistica.getTorneioId().equals(nomeTorneio)) {
                 resultado.add(estatistica);
             }
         }
@@ -62,10 +62,10 @@ public class ControladorEstatisticas {
     /**
      * Registra uma derrota para o jogador/equipe em um torneio específico.
      * @param nomeJogadorOuEquipe Nome do jogador ou equipe
-     * @param torneioId Nome ou ID do torneio
+     * @param nomeTorneio Nome ou ID do torneio
      */
-    public void registrarDerrota(String nomeJogadorOuEquipe, String torneioId) {
-        Estatisticas estatistica = buscarOuCriarEstatistica(nomeJogadorOuEquipe, torneioId);
+    public void registrarDerrota(String nomeJogadorOuEquipe, String nomeTorneio) {
+        Estatisticas estatistica = buscarOuCriarEstatistica(nomeJogadorOuEquipe, nomeTorneio);
         estatistica.adicionarDerrota();
         atualizarRanking();
     }
@@ -73,20 +73,20 @@ public class ControladorEstatisticas {
     /**
      * Busca uma estatística existente ou cria uma nova, caso não exista.
      * @param nomeJogadorOuEquipe Nome do jogador ou equipe
-     * @param torneioId Nome ou ID do torneio
+     * @param nomeTorneio Nome ou ID do torneio
      * @return Objeto Estatisticas correspondente
      */
-    private Estatisticas buscarOuCriarEstatistica(String nomeJogadorOuEquipe, String torneioId) {
+    private Estatisticas buscarOuCriarEstatistica(String nomeJogadorOuEquipe, String nomeTorneio) {
         for (Estatisticas estatistica : estatisticasList) {
             if (estatistica.getNomeJogadorOuEquipe().equals(nomeJogadorOuEquipe) &&
-                    estatistica.getTorneioId().equals(torneioId)) {
+                    estatistica.getTorneioId().equals(nomeTorneio)) {
                 return estatistica;
             }
         }
 
         // Se não encontrar, cria nova estatística
         Estatisticas novaEstatistica = new Estatisticas(
-                nomeJogadorOuEquipe, torneioId, 0, 0, 0);
+                nomeJogadorOuEquipe, nomeTorneio, 0, 0, 0);
         estatisticasList.add(novaEstatistica);
         return novaEstatistica;
     }
