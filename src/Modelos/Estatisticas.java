@@ -37,7 +37,7 @@ public class Estatisticas {
         return nomeJogadorOuEquipe;
     }
 
-    public String getTorneioId() {
+    public String getNomeTorneio() {
         return nomeTorneio;
     }
 
