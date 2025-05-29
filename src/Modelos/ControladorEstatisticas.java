@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 /**
  * Classe responsável por controlar e gerenciar as estatísticas dos jogadores ou equipes.
@@ -21,16 +23,26 @@ public class ControladorEstatisticas {
     }
 
     /**
-     * Atualiza o ranking dos jogadores/equipes com base nos pontos.
-     * Ordena a lista e define a posição (ranking) de cada um.
+     * Atualiza o ranking dos jogadores/equipes com base nos pontos, DENTRO DE CADA TORNEIO.
+     * Agrupa as estatísticas por torneio, ordena cada grupo e define a posição (ranking) de cada um.
      */
     public void atualizarRanking() {
-        Collections.sort(estatisticasList, Comparator.comparingInt(Estatisticas::getPontos).reversed());
+        // Agrupa as estatísticas por ID do torneio
+        Map<String, List<Estatisticas>> estatisticasPorTorneio = estatisticasList.stream()
+                .collect(Collectors.groupingBy(Estatisticas::getNomeTorneio));
 
-        // Após ordenar, define o ranking de cada estatística
-        for (int i = 0; i < estatisticasList.size(); i++) {
-            estatisticasList.get(i).setRanking(i + 1);
+        // Para cada torneio, ordena os participantes e atribui os rankings
+        for (List<Estatisticas> statsDoTorneio : estatisticasPorTorneio.values()) {
+            // Ordena por pontos em ordem decrescente
+            statsDoTorneio.sort(Comparator.comparingInt(Estatisticas::getPontos).reversed());
+
+            // Define o ranking para cada estatística dentro deste torneio específico
+            for (int i = 0; i < statsDoTorneio.size(); i++) {
+                statsDoTorneio.get(i).setRanking(i + 1);
+            }
         }
+        // A lista principal 'estatisticasList' não é reordenada globalmente,
+        // mas os objetos Estatisticas dentro dela agora têm seus rankings específicos do torneio.
     }
 
     /**
@@ -39,13 +51,9 @@ public class ControladorEstatisticas {
      * @return Lista de estatísticas referentes ao torneio informado
      */
     public List<Estatisticas> filtrarPorTorneio(String nomeTorneio) {
-        List<Estatisticas> resultado = new ArrayList<>();
-        for (Estatisticas estatistica : estatisticasList) {
-            if (estatistica.getNomeTorneio().equals(nomeTorneio)) {
-                resultado.add(estatistica);
-            }
-        }
-        return resultado;
+        return estatisticasList.stream()
+                .filter(e -> e.getNomeTorneio().equalsIgnoreCase(nomeTorneio))
+                .collect(Collectors.toList());
     }
 
     /**
@@ -56,7 +64,7 @@ public class ControladorEstatisticas {
     public void registrarVitoria(String nomeJogadorOuEquipe, String torneioId) {
         Estatisticas estatistica = buscarOuCriarEstatistica(nomeJogadorOuEquipe, torneioId);
         estatistica.adicionarVitoria();
-        atualizarRanking();
+        atualizarRanking(); // Atualiza os rankings considerando a separação por torneio
     }
 
     /**
@@ -67,7 +75,7 @@ public class ControladorEstatisticas {
     public void registrarDerrota(String nomeJogadorOuEquipe, String nomeTorneio) {
         Estatisticas estatistica = buscarOuCriarEstatistica(nomeJogadorOuEquipe, nomeTorneio);
         estatistica.adicionarDerrota();
-        atualizarRanking();
+        atualizarRanking(); // Atualiza os rankings considerando a separação por torneio
     }
 
     /**
@@ -78,8 +86,8 @@ public class ControladorEstatisticas {
      */
     private Estatisticas buscarOuCriarEstatistica(String nomeJogadorOuEquipe, String nomeTorneio) {
         for (Estatisticas estatistica : estatisticasList) {
-            if (estatistica.getNomeJogadorOuEquipe().equals(nomeJogadorOuEquipe) &&
-                    estatistica.getNomeTorneio().equals(nomeTorneio)) {
+            if (estatistica.getNomeJogadorOuEquipe().equalsIgnoreCase(nomeJogadorOuEquipe) &&
+                    estatistica.getNomeTorneio().equalsIgnoreCase(nomeTorneio)) {
                 return estatistica;
             }
         }
@@ -92,16 +100,46 @@ public class ControladorEstatisticas {
     }
 
     /**
-     * Retorna o ranking de todos os jogadores/equipes como uma String formatada.
-     * @return String com o ranking
+     * Retorna os rankings de todos os torneios como uma String formatada.
+     * @return String com os rankings separados por torneio
      */
     public String exibirRanking() {
         StringBuilder sb = new StringBuilder();
-        sb.append("===== RANKING =====\n");
-        for (Estatisticas estatistica : estatisticasList) {
-            sb.append(String.format("#%d - %s\n",
-                    estatistica.getRanking(),
-                    estatistica.toString()));
+        sb.append("===== RANKINGS POR TORNEIO =====\n");
+
+        if (estatisticasList.isEmpty()) {
+            sb.append("Nenhuma estatística registrada.\n");
+            return sb.toString();
+        }
+
+        // Agrupa as estatísticas por torneio para exibição
+        Map<String, List<Estatisticas>> estatisticasPorTorneio = estatisticasList.stream()
+                .collect(Collectors.groupingBy(Estatisticas::getNomeTorneio));
+
+        // Ordena os nomes dos torneios para exibição consistente (opcional)
+        List<String> nomesTorneiosOrdenados = new ArrayList<>(estatisticasPorTorneio.keySet());
+        Collections.sort(nomesTorneiosOrdenados);
+
+        for (String nomeTorneio : nomesTorneiosOrdenados) {
+            sb.append("\n--- RANKING TORNEIO: ").append(nomeTorneio.toUpperCase()).append(" ---\n");
+            List<Estatisticas> statsDoTorneio = estatisticasPorTorneio.get(nomeTorneio);
+
+            // Ordena pela posição no ranking (que foi definida em atualizarRanking)
+            // ou por pontos, se preferir recalcular a ordem aqui.
+            statsDoTorneio.sort(Comparator.comparingInt(Estatisticas::getRanking));
+
+            if (statsDoTorneio.isEmpty()) {
+                sb.append("  Nenhum participante neste torneio.\n");
+            } else {
+                for (Estatisticas estatistica : statsDoTorneio) {
+                    sb.append(String.format("  #%d - %s: %d pts (%dV/%dD)\n",
+                            estatistica.getRanking(), // Usa o ranking específico do torneio
+                            estatistica.getNomeJogadorOuEquipe(),
+                            estatistica.getPontos(),
+                            estatistica.getVitorias(),
+                            estatistica.getDerrotas()));
+                }
+            }
         }
         return sb.toString();
     }

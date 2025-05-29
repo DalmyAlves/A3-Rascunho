@@ -37,7 +37,7 @@ public class HelloController {
         controlador.registrarDerrota("Jogador X", "Torneio 2");
 
         controlador.atualizarRanking();
-        
+
         ObservableList<String> torneios = FXCollections.observableArrayList();
         for (Estatisticas e : controlador.getEstatisticasList()) {
             if (!torneios.contains(e.getNomeTorneio())) {
