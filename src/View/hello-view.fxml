@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.Font?>
+
+<BorderPane xmlns="http://javafx.com/javafx/23.0.1"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="Controllers.HelloController"
+            prefHeight="603.0" prefWidth="871.0">
+
+    <top>
+        <Label text="Estatísticas do Campeonato"
+               prefHeight="45.0" prefWidth="147.0"
+               BorderPane.alignment="CENTER"/>
+    </top>
+
+    <left>
+        <VBox prefHeight="558.0" prefWidth="228.0" spacing="10" alignment="TOP_CENTER" BorderPane.alignment="CENTER">
+            <children>
+                <Label text="Filtrar por:">
+                    <font>
+                        <Font name="Arial" size="14.0"/>
+                    </font>
+                </Label>
+                <ComboBox fx:id="cbTorneio"
+                          prefHeight="25.0" prefWidth="177.0"
+                          promptText="Selecionar o Torneio"/>
+                <!-- ComboBox e DatePicker extras não utilizados no controlador atual -->
+                <ComboBox prefHeight="25.0" prefWidth="177.0" promptText="Selecionar o Jogador"/>
+                <DatePicker prefHeight="25.0" prefWidth="177.0"/>
+                <Button fx:id="btnAplicar" text="Aplicar" onAction="#aplicarFiltro"/>
+            </children>
+        </VBox>
+    </left>
+
+    <center>
+        <TableView fx:id="tabela"
+                   prefHeight="558.0" prefWidth="536.0"
+                   BorderPane.alignment="CENTER">
+            <columns>
+                <TableColumn fx:id="colNome" prefWidth="181.0" text="Time/Jogador"/>
+                <TableColumn fx:id="colJogos" prefWidth="84.0" text="Jogos"/>
+                <TableColumn fx:id="colVitorias" prefWidth="83.0" text="Vitórias"/>
+                <TableColumn fx:id="colDerrotas" prefWidth="108.0" text="Derrotas"/>
+                <TableColumn fx:id="colPontos" prefWidth="108.0" text="Pontos"/>
+                <TableColumn fx:id="colRanking" prefWidth="84.0" text="Ranking"/>
+            </columns>
+        </TableView>
+    </center>
+
+    <bottom>
+        <HBox prefHeight="34.0" prefWidth="871.0" alignment="CENTER" BorderPane.alignment="CENTER">
+            <children>
+                <Label fx:id="lblUltimaAtualizacao"
+                       alignment="BOTTOM_CENTER"
+                       text="Última atualização:"
+                       prefHeight="16.0" prefWidth="300.0">
+                    <font>
+                        <Font name="Arial" size="14.0"/>
+                    </font>
+                </Label>
+            </children>
+        </HBox>
+    </bottom>
+</BorderPane>
