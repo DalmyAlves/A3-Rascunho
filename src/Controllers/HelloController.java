@@ -27,13 +27,18 @@ public class HelloController {
 
     @FXML
     public void initialize() {
-        // Dados simulados para teste
+        // Dados simulados para teste, futuramente irão ser retirados.
+        controlador.registrarVitoria("Time Alpha", "Torneio 1");
         controlador.registrarVitoria("Time Alpha", "Torneio 1");
         controlador.registrarDerrota("Time Alpha", "Torneio 1");
         controlador.registrarVitoria("Time Beta", "Torneio 1");
         controlador.registrarDerrota("Time Beta", "Torneio 1");
+        controlador.registrarDerrota("Time Beta", "Torneio 1");
         controlador.registrarVitoria("Jogador X", "Torneio 2");
         controlador.registrarDerrota("Jogador X", "Torneio 2");
+        controlador.registrarVitoria("Jogador Y", "Torneio 2");
+        controlador.registrarVitoria("Jogador Y", "Torneio 2");
+        controlador.registrarDerrota("Jogador Y", "Torneio 2");
 
         controlador.atualizarRanking();
 
