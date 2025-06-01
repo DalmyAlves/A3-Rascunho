@@ -6,23 +6,24 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
+/**
+ * Classe principal que inicializa a aplicação JavaFX.
+ */
 public class Main extends Application {
 
+    /**
+     * Inicializa a janela principal da aplicação.
+     * @param primaryStage o palco principal da aplicação.
+     */
     @Override
     public void start(Stage primaryStage) {
-        try {
-
-            Parent root = FXMLLoader.load(getClass().getResource("../View/hello-view.fxml"));
-
-            Scene scene = new Scene(root);
-            primaryStage.setTitle("Estatísticas do Campeonato");
-            primaryStage.setScene(scene);
-            primaryStage.show();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        // implementação...
     }
 
+    /**
+     * Método  principal que inicia a aplicação JavaFX.
+     * @param args argumentos de linha de comando.
+     */
     public static void main(String[] args) {
         launch(args);
     }

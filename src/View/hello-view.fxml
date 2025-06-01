@@ -12,21 +12,27 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.HelloController">
+<BorderPane prefHeight="603.0" prefWidth="871.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.HelloController">
+
+    <top>
+        <Label prefHeight="45.0" prefWidth="147.0" text="Estatísticas do Campeonato" BorderPane.alignment="CENTER" />
+    </top>
 
     <left>
         <VBox alignment="TOP_CENTER" prefHeight="558.0" prefWidth="228.0" spacing="10" BorderPane.alignment="CENTER">
             <children>
-            <Pane prefHeight="566.0" prefWidth="228.0">
+            <Pane prefHeight="518.0" prefWidth="228.0">
                <children>
-                      <Label layoutX="82.0" layoutY="60.0" text="Filtrar por:">
+                      <Label layoutX="82.0" layoutY="52.0" text="Filtrar por:">
                           <font>
                               <Font name="Arial" size="14.0" />
                           </font>
                       </Label>
-                      <ComboBox fx:id="cbTorneio" layoutX="25.0" layoutY="102.0" prefHeight="25.0" prefWidth="177.0" promptText="Selecionar o Torneio" />
-                      <DatePicker layoutX="25.0" layoutY="151.0" prefHeight="25.0" prefWidth="177.0" />
-                      <Button fx:id="btnAplicar" layoutX="86.0" layoutY="200.0" onAction="#aplicarFiltro" text="Aplicar" />
+                      <ComboBox fx:id="cbTorneio" layoutX="25.0" layoutY="87.0" prefHeight="25.0" prefWidth="177.0" promptText="Selecionar o Torneio" />
+                      <!-- ComboBox e DatePicker extras não utilizados no controlador atual -->
+                      <ComboBox layoutX="25.0" layoutY="127.0" prefHeight="25.0" prefWidth="177.0" promptText="Selecionar o Jogador" />
+                      <DatePicker layoutX="25.0" layoutY="160.0" prefHeight="25.0" prefWidth="177.0" />
+                      <Button fx:id="btnAplicar" layoutX="86.0" layoutY="208.0" onAction="#aplicarFiltro" text="Aplicar" />
                </children>
             </Pane>
             </children>
@@ -43,9 +49,6 @@
                 <TableColumn fx:id="colPontos" prefWidth="108.0" text="Pontos" />
                 <TableColumn fx:id="colRanking" prefWidth="84.0" text="Ranking" />
             </columns>
-         <columnResizePolicy>
-            <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
-         </columnResizePolicy>
         </TableView>
     </center>
 
@@ -60,11 +63,4 @@
             </children>
         </HBox>
     </bottom>
-   <top>
-      <Label text="Estatísticas do Campeonato" BorderPane.alignment="CENTER">
-         <font>
-            <Font size="22.0" />
-         </font>
-      </Label>
-   </top>
 </BorderPane>

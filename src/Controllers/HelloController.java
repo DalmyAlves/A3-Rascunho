@@ -1,5 +1,6 @@
 package Controllers;
 
+import Modelos.ControladorEstatisticas;
 import Modelos.Estatisticas;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -10,6 +11,9 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 
+/**
+ * Controlador da interface gráfica JavaFX responsável por exibir e filtrar estatísticas de torneios.
+ */
 public class HelloController {
 
     @FXML private ComboBox<String> cbTorneio;
@@ -23,22 +27,20 @@ public class HelloController {
     @FXML private TableColumn<Estatisticas, Integer> colRanking;
     @FXML private Label lblUltimaAtualizacao;
 
-    private Estatisticas controlador = new Estatisticas();
+    private ControladorEstatisticas controlador = new ControladorEstatisticas();
 
+    /**
+     * Inicializa a interface, popula dados simulados e configura os componentes da tabela.
+     */
     @FXML
     public void initialize() {
-        // Dados simulados para teste, futuramente irão ser retirados.
-        controlador.registrarVitoria("Time Alpha", "Torneio 1");
+        // Dados simulados para teste
         controlador.registrarVitoria("Time Alpha", "Torneio 1");
         controlador.registrarDerrota("Time Alpha", "Torneio 1");
         controlador.registrarVitoria("Time Beta", "Torneio 1");
         controlador.registrarDerrota("Time Beta", "Torneio 1");
-        controlador.registrarDerrota("Time Beta", "Torneio 1");
         controlador.registrarVitoria("Jogador X", "Torneio 2");
         controlador.registrarDerrota("Jogador X", "Torneio 2");
-        controlador.registrarVitoria("Jogador Y", "Torneio 2");
-        controlador.registrarVitoria("Jogador Y", "Torneio 2");
-        controlador.registrarDerrota("Jogador Y", "Torneio 2");
 
         controlador.atualizarRanking();
 
@@ -60,6 +62,9 @@ public class HelloController {
         atualizarUltimaAtualizacao();
     }
 
+    /**
+     * Aplica o filtro de torneio selecionado e atualiza a tabela de estatísticas.
+     */
     @FXML
     public void aplicarFiltro() {
         String torneioSelecionado = cbTorneio.getValue();
@@ -74,6 +79,9 @@ public class HelloController {
         atualizarUltimaAtualizacao();
     }
 
+    /**
+     * Atualiza o rótulo com a data e hora da última atualização.
+     */
     private void atualizarUltimaAtualizacao() {
         String dataHora = LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss"));
         lblUltimaAtualizacao.setText("Última atualização: " + dataHora);

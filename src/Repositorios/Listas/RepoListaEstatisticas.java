@@ -8,22 +8,37 @@ import java.util.List;
 import java.util.Optional;
 
 /**
- * Implementação do repositório de estatísticas e controladores de estatísticas usando listas.
+ * Implementação do repositório de estatísticas usando listas.
+ * Permite adicionar, listar, buscar, atualizar e remover estatísticas de participantes em torneios.
  */
 public class RepoListaEstatisticas implements InterfaceRepoListasEstatiscas {
 
     private final List<Estatisticas> estatisticas = new ArrayList<>();
 
+    /**
+     * Adiciona uma estatística ao repositório.
+     * @param estatistica a estatística a ser adicionada
+     */
     @Override
     public void adicionar(Estatisticas estatistica) {
         estatisticas.add(estatistica);
     }
 
+    /**
+     * Lista todas as estatísticas presentes no repositório.
+     * @return uma nova lista contendo todas as estatísticas
+     */
     @Override
     public List<Estatisticas> listarTodos() {
         return new ArrayList<>(estatisticas);
     }
 
+    /**
+     * Busca estatísticas pelo nome do participante e torneio.
+     * @param nome nome do participante
+     * @param torneioId identificador do torneio
+     * @return um Optional contendo a estatística, se encontrada
+     */
     @Override
     public Optional<Estatisticas> buscarPorNomeETorneio(String nome, String torneioId) {
         return estatisticas.stream()
@@ -32,6 +47,11 @@ public class RepoListaEstatisticas implements InterfaceRepoListasEstatiscas {
                 .findFirst();
     }
 
+    /**
+     * Atualiza uma estatística específica.
+     * @param estatisticaAtualizada a estatística atualizada
+     * @return true se a atualização foi bem-sucedida, false caso contrário
+     */
     @Override
     public boolean atualizarEstatisticas(Estatisticas estatisticaAtualizada) {
         for (int i = 0; i < estatisticas.size(); i++) {
@@ -45,12 +65,23 @@ public class RepoListaEstatisticas implements InterfaceRepoListasEstatiscas {
         return false;
     }
 
+    /**
+     * Remove uma estatística pelo nome do participante e torneio.
+     * @param nome nome do participante
+     * @param torneioId identificador do torneio
+     * @return true se a remoção foi bem-sucedida, false caso contrário
+     */
     @Override
     public boolean removerEstatisticas(String nome, String torneioId) {
         return estatisticas.removeIf(e -> e.getNomeJogadorOuEquipe().equals(nome)
                 && e.getNomeTorneio().equals(torneioId));
     }
 
+    /**
+     * Busca uma estatística pelo índice na lista.
+     * @param indice o índice da estatística
+     * @return um Optional contendo a estatística, se encontrada
+     */
     @Override
     public Optional<Estatisticas> buscarPorIndice(int indice) {
         if (indice >= 0 && indice < estatisticas.size()) {
@@ -59,6 +90,12 @@ public class RepoListaEstatisticas implements InterfaceRepoListasEstatiscas {
         return Optional.empty();
     }
 
+    /**
+     * Atualiza uma estatística pelo índice.
+     * @param indice o índice da estatística a ser atualizada
+     * @param controladorAtualizado a nova estatística
+     * @return true se a atualização foi bem-sucedida, false caso contrário
+     */
     @Override
     public boolean atualizarPorIndice(int indice, Estatisticas controladorAtualizado) {
         if (indice >= 0 && indice < estatisticas.size()) {
@@ -68,6 +105,11 @@ public class RepoListaEstatisticas implements InterfaceRepoListasEstatiscas {
         return false;
     }
 
+    /**
+     * Remove uma estatística pelo índice.
+     * @param indice o índice da estatística a ser removida
+     * @return true se a remoção foi bem-sucedida, false caso contrário
+     */
     @Override
     public boolean removerPorIndice(int indice) {
         if (indice >= 0 && indice < estatisticas.size()) {
@@ -77,6 +119,10 @@ public class RepoListaEstatisticas implements InterfaceRepoListasEstatiscas {
         return false;
     }
 
+    /**
+     * Busca a primeira estatística da lista, caso exista.
+     * @return um Optional contendo a primeira estatística, se existir
+     */
     @Override
     public Optional<Estatisticas> buscarPrimeiro() {
         if (estatisticas.isEmpty()) {

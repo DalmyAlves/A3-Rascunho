@@ -11,6 +11,9 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 
+/**
+ * Controlador da interface gráfica JavaFX responsável por exibir e filtrar estatísticas de torneios.
+ */
 public class HelloController {
 
     @FXML private ComboBox<String> cbTorneio;
@@ -26,6 +29,9 @@ public class HelloController {
 
     private ControladorEstatisticas controlador = new ControladorEstatisticas();
 
+    /**
+     * Inicializa a interface, popula dados simulados e configura os componentes da tabela.
+     */
     @FXML
     public void initialize() {
         // Dados simulados para teste
@@ -56,6 +62,9 @@ public class HelloController {
         atualizarUltimaAtualizacao();
     }
 
+    /**
+     * Aplica o filtro de torneio selecionado e atualiza a tabela de estatísticas.
+     */
     @FXML
     public void aplicarFiltro() {
         String torneioSelecionado = cbTorneio.getValue();
@@ -70,6 +79,9 @@ public class HelloController {
         atualizarUltimaAtualizacao();
     }
 
+    /**
+     * Atualiza o rótulo com a data e hora da última atualização.
+     */
     private void atualizarUltimaAtualizacao() {
         String dataHora = LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss"));
         lblUltimaAtualizacao.setText("Última atualização: " + dataHora);
