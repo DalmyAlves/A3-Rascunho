@@ -7,21 +7,31 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 /**
- * Classe principal que inicializa a aplicação JavaFX.
+ * Classe principal que inicializa e executa a aplicação JavaFX de estatísticas do campeonato.
  */
 public class Main extends Application {
 
     /**
-     * Inicializa a janela principal da aplicação.
+     * Inicializa a janela principal da aplicação JavaFX.
      * @param primaryStage o palco principal da aplicação.
      */
     @Override
     public void start(Stage primaryStage) {
-        // implementação...
+        try {
+
+            Parent root = FXMLLoader.load(getClass().getResource("hello-view.fxml"));
+
+            Scene scene = new Scene(root);
+            primaryStage.setTitle("Estatísticas do Campeonato");
+            primaryStage.setScene(scene);
+            primaryStage.show();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     /**
-     * Método  principal que inicia a aplicação JavaFX.
+     * Método principal para execução da aplicação.
      * @param args argumentos de linha de comando.
      */
     public static void main(String[] args) {
