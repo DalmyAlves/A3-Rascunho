@@ -1,6 +1,7 @@
 package Repositorios;
 
-import Modelos.ControladorEstatisticas;
+import Modelos.ModeloEstatisticas;
+
 import java.util.List;
 import java.util.Optional;
 
@@ -13,22 +14,22 @@ public interface InterfaceRepoListasControladoEstatisticas {
     /**
      * Adiciona um novo controlador ao repositório.
      */
-    void adicionar( ControladorEstatisticas controlador);
+    void adicionar( ModeloEstatisticas controlador);
 
     /**
      * Lista todos os controladores presentes no repositório.
      */
-    List<ControladorEstatisticas> listarTodos();
+    List<ModeloEstatisticas> listarTodos();
 
     /**
      * Busca um controlador pelo índice na lista.
      */
-    Optional<ControladorEstatisticas> buscarPorIndice( int indice);
+    Optional<ModeloEstatisticas> buscarPorIndice(int indice);
 
     /**
      * Atualiza um controlador pelo índice.
      */
-    boolean atualizarPorIndice(int indice, ControladorEstatisticas controladorAtualizado);
+    boolean atualizarPorIndice(int indice, ModeloEstatisticas controladorAtualizado);
 
     /**
      * Remove um controlador pelo índice.
@@ -38,6 +39,6 @@ public interface InterfaceRepoListasControladoEstatisticas {
     /**
      * Busca o primeiro controlador da lista, caso exista.
      */
-    Optional<ControladorEstatisticas> buscarPrimeiro();
+    Optional<ModeloEstatisticas> buscarPrimeiro();
 
 }
